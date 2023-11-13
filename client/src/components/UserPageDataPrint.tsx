@@ -415,7 +415,7 @@ function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    marginBottom: "20px",
+                    marginBottom: "40px",
                     marginTop: "60px",
                     backgroundImage: `url(${img})`, // Apply the background image
                     backgroundSize: "cover",
@@ -443,9 +443,21 @@ function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
                         color: "#212529",
                         fontSize: "0.85rem",
                         fontWeight: "bold",
+                        marginBottom: "-20px",
                       }}
                     >
-                      Vote for Sri BANDI SANJAY KUMAR(BJP)
+                      Vote for
+                    </h2>
+                    <br />
+                    <h2
+                      style={{
+                        textAlign: "center",
+                        color: "#212529",
+                        fontSize: "0.85rem",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Sri BANDI SANJAY KUMAR(BJP)
                     </h2>
                     <h2
                       style={{
@@ -518,7 +530,7 @@ function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
                       display: "flex",
                       justifyContent: "space-between",
                       width: "100%",
-                      marginTop: "50px",
+                      marginTop: "55px",
                     }}
                   >
                     <button
