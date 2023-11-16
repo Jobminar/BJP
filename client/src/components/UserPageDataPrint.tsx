@@ -208,6 +208,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import img from "./political.png";
 import bgImg from "./newjpnadda.png";
+import msgImg from "./SHANKU.png";
 interface UserPageDataProps {
   vid: string;
   partNo: number;
@@ -264,7 +265,12 @@ function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
 
     // Add the HTTP link to the message
     const link = "https://mpbandisanjay.vercel.app/"; // Replace with your actual link
-    const message = `\nCheck out this voter card:\nVoter ID:${templatePhrase}\n ${voter.EPIC_NO}\nName: ${voter.NAME}\nPart Number: ${voter.PART_NO}\nUser: ${userName}\nIndex: ${index}\n\nFor more information, visit: ${link}`;
+
+    // Image URL hosted on a publicly accessible server
+    const imageUrl = { msgImg }; // Replace with your actual image URL
+
+    // Include the image URL in the message
+    const message = `\nCheck out this voter card:\nVoter ID:${templatePhrase}\n ${voter.EPIC_NO}\nName: ${voter.NAME}\nPart Number: ${voter.PART_NO}\nUser: ${userName}\nIndex: ${index}\n\nFor more information, visit: ${link}\nImage: ${imageUrl}`;
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
