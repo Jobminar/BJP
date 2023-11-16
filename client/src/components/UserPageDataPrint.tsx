@@ -213,6 +213,7 @@ interface UserPageDataProps {
   vid: string;
   partNo: number;
   house: string;
+  polling: string;
 }
 
 interface VoterData {
@@ -220,6 +221,7 @@ interface VoterData {
   C_HOUSE_NO: string;
   NAME: string;
   PART_NO: string;
+  PS_NAME_EN: string;
 }
 
 function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
@@ -270,7 +272,7 @@ function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
     const imageUrl = { msgImg }; // Replace with your actual image URL
 
     // Include the image URL in the message
-    const message = `\nCheck out this voter card:\nVoter ID:${templatePhrase}\n ${voter.EPIC_NO}\nName: ${voter.NAME}\nPart Number: ${voter.PART_NO}\nUser: ${userName}\nIndex: ${index}\n\nFor more information, visit: ${link}\nImage: ${imageUrl}`;
+    const message = `\nCheck out this voter card:\nVoter ID:${templatePhrase}\n ${voter.EPIC_NO}\nName: ${voter.NAME}\nPart Number: ${voter.PART_NO}\nUser: ${userName}\nIndex: ${index}\n\nFor more information, visit: ${link}\nImage: ${imageUrl}\nPolling-Booth:${voter.PS_NAME_EN}`;
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
@@ -318,6 +320,7 @@ function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
             vid: voter.EPIC_NO,
             partno: voter.PART_NO,
             house: voter.C_HOUSE_NO,
+            polling: voter.PS_NAME_EN,
             id: userId,
           }
         );
@@ -408,10 +411,12 @@ function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
       </div>
 
       <div>
+        {/* If loading is true, show a loading message, else display the voter cards */}
         {loading ? (
           <p>Loading...</p>
         ) : (
           <ul className="list-group">
+            {/* Check if data is an array and map through each voter */}
             {Array.isArray(data) &&
               data.map((voter: VoterData, index) => (
                 <div
@@ -423,31 +428,31 @@ function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
                     alignItems: "center",
                     marginBottom: "40px",
                     marginTop: "60px",
-                    backgroundImage: `url(${img})`, // Apply the background image
+                    backgroundImage: `url(${img})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    width: "300px", // Adjust the width as needed
-                    height: "400px", // Adjust the height as needed
+                    width: "300px",
+                    height: "400px",
                     padding: "20px",
                   }}
                 >
+                  {/* Content for the voter card */}
                   <div>
                     <h1
                       style={{
                         textAlign: "center",
                         color: "#FF69B4",
-                        fontSize: "4rem",
-                        margin: "12px 0",
+                        fontSize: "2rem",
+                        margin: "30px 0",
                       }}
                     >
                       <span style={{ color: "#FF5306" }}>&nbsp;</span>
                     </h1>
-
                     <h2
                       style={{
                         textAlign: "center",
                         color: "#212529",
-                        fontSize: "0.85rem",
+                        fontSize: "0.8rem",
                         fontWeight: "bold",
                         marginBottom: "-20px",
                       }}
@@ -459,7 +464,7 @@ function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
                       style={{
                         textAlign: "center",
                         color: "#212529",
-                        fontSize: "0.85rem",
+                        fontSize: "0.8rem",
                         fontWeight: "bold",
                       }}
                     >
@@ -469,7 +474,7 @@ function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
                       style={{
                         textAlign: "center",
                         color: "#212529",
-                        fontSize: "0.85rem",
+                        fontSize: "0.8rem",
                         fontWeight: "bold",
                       }}
                     >
@@ -479,7 +484,7 @@ function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
                       style={{
                         textAlign: "center",
                         color: "#212529",
-                        fontSize: "0.85rem",
+                        fontSize: "0.8rem",
                         fontWeight: "bold",
                         marginTop: "10px",
                       }}
@@ -490,7 +495,7 @@ function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
                       style={{
                         textAlign: "center",
                         color: "#212529",
-                        fontSize: "0.7rem",
+                        fontSize: "0.5rem",
                         marginTop: "10px",
                       }}
                     >
@@ -500,13 +505,15 @@ function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
                       style={{
                         textAlign: "center",
                         color: "#212529",
-                        fontSize: "0.7rem",
+                        fontSize: "0.5rem",
                       }}
                     >
                       తేదీ: 30వ నవంబర్ 2023, ఉదయం 7 గంటల నుండి సాయంత్రం 6 గంటల
                       వరకు.
                     </h3>
                   </div>
+
+                  {/* Voter details */}
                   <div style={{ width: "100%" }}>
                     <div
                       style={{
@@ -514,82 +521,102 @@ function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
                         justifyContent: "space-between",
                       }}
                     >
-                      <div style={{ textAlign: "left" }}>
-                        <label>C House Number:</label>
+                      <div
+                        style={{
+                          textAlign: "left",
+                          fontSize: "0.63rem",
+                          fontStyle: "oblique",
+                        }}
+                      >
+                        {/* Labels for voter details */}
+                        <label style={{ margin: "0px" }}>CHouse No:</label>
                         <br />
-                        <label>EPIC Number:</label>
+                        <label style={{ margin: "0px" }}>EPIC No:</label>
                         <br />
-                        <label>Name:</label>
+                        <label style={{ margin: "0px" }}>Name:</label>
                         <br />
-                        <label>Part Number:</label>
+                        <label style={{ margin: "0px" }}>Part No:</label>
+                        <br />
+                        <label style={{ margin: "0px" }}>Booth name:</label>
                       </div>
-                      <div style={{ textAlign: "right" }}>
+                      <div style={{ textAlign: "right", fontSize: "0.7rem" }}>
+                        {/* Voter details */}
                         <p>{voter.C_HOUSE_NO}</p>
                         <p>{voter.EPIC_NO}</p>
                         <p>{voter.NAME}</p>
                         <p>{voter.PART_NO}</p>
+                        <p>{voter.PS_NAME_EN}</p>
                       </div>
                     </div>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      width: "100%",
-                      marginTop: "55px",
-                    }}
-                  >
-                    <button
-                      onClick={() => generatePDF(voter, index)}
+
+                    {/* Action buttons */}
+                    <div
                       style={{
-                        fontSize: "1.5rem",
-                        backgroundColor: "orange",
-                        padding: "1px 1px",
-                        borderRadius: "10px",
-                        cursor: "pointer",
-                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        width: "100%",
+                        marginTop: "72px",
                       }}
                     >
-                      <i className="fa fa-file" aria-hidden="true"></i>print
-                    </button>
-                    <button
-                      onClick={() => handleWhatsAppShare(voter, index)}
-                      style={{
-                        fontSize: "1.5rem",
-                        backgroundColor: "yellow",
-                        padding: "1px 1px",
-                        borderRadius: "10px",
-                        cursor: "pointer",
-                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                      }}
-                    >
-                      <i className="fa fa-share-alt" aria-hidden="true"></i>
-                      share
-                    </button>
-                    <button
-                      style={{
-                        fontSize: "1.5rem",
-                        backgroundColor: "red",
-                        padding: "1px 1px",
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                      }}
-                      onClick={() => {
-                        setNewVid("");
-                        setNewPartNo(0);
-                        setNewHouse("");
-                        window.location.reload();
-                      }}
-                    >
-                      Clear
-                    </button>
+                      {/* Button to generate PDF */}
+                      <button
+                        onClick={() => generatePDF(voter, index)}
+                        className="action-button"
+                        style={{
+                          fontSize: "1rem",
+                          backgroundColor: "orange",
+                          padding: "1px 1px",
+                          borderRadius: "10px",
+                          cursor: "pointer",
+                          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                        }}
+                      >
+                        <i className="fa fa-file" aria-hidden="true"></i> Print
+                      </button>
+                      {/* Button to share on WhatsApp */}
+                      <button
+                        onClick={() => handleWhatsAppShare(voter, index)}
+                        className="action-button"
+                        style={{
+                          fontSize: "1rem",
+                          backgroundColor: "yellow",
+                          padding: "1px 1px",
+                          borderRadius: "10px",
+                          cursor: "pointer",
+                          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                        }}
+                      >
+                        <i className="fa fa-share-alt" aria-hidden="true"></i>{" "}
+                        Share
+                      </button>
+                      {/* Button to clear the form */}
+                      <button
+                        onClick={() => {
+                          setNewVid("");
+                          setNewPartNo(0);
+                          setNewHouse("");
+                          window.location.reload();
+                        }}
+                        className="action-button"
+                        style={{
+                          fontSize: "1.5rem",
+                          backgroundColor: "red",
+                          padding: "1px 1px",
+                          borderRadius: "5px",
+                          cursor: "pointer",
+                          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                        }}
+                      >
+                        Clear
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
           </ul>
         )}
       </div>
+
       <button
         onClick={scrollToTop}
         style={{

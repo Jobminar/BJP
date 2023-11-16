@@ -21,7 +21,9 @@ const App = () => {
           <Route path="/home" element={<UserHome />}></Route>
           <Route
             path="/print"
-            element={<UserPageDataPrint vid="" partNo={0} house="" />}
+            element={
+              <UserPageDataPrint vid="" partNo={0} house="" polling="" />
+            }
           ></Route>
 
           <Route path="/admin/8899" element={<AdminSignup />}></Route>
