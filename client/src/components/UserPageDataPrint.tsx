@@ -263,7 +263,7 @@ function UserPageDataPrint({ vid, partNo, house }: UserPageDataProps) {
       "Vote for BANDI SANJAY KUMAR garu,\nBharatiya Janata Party, Karimnagar Constituency\n శ్రీ బండి సంజయ్‌ కుమార్ గారు(గుర్తు:కమలం)\n కరీంనగర్ నియోజకవర్గం\n తేదీ: 30వ నవంబర్ 2023, ఉదయం 7 గంటల నుండి సాయంత్రం 6 గంటల వరకు.\n By YUVA KRANTHI (ఇట్లు మీ యువ క్రాంతి)";
 
     // Add the HTTP link to the message
-    const link = "https://yuvakranthi.in/"; // Replace with your actual link
+    const link = "https://mpbandisanjay.vercel.app/"; // Replace with your actual link
     const message = `\nCheck out this voter card:\nVoter ID:${templatePhrase}\n ${voter.EPIC_NO}\nName: ${voter.NAME}\nPart Number: ${voter.PART_NO}\nUser: ${userName}\nIndex: ${index}\n\nFor more information, visit: ${link}`;
 
     const encodedMessage = encodeURIComponent(message);
